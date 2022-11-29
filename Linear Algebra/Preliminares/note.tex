@@ -1,0 +1,215 @@
+\documentclass{tufte-handout}
+
+\title{Course:  Linear Algebra(Preliminares)}
+\author{Sebastián Caballero}
+\date{\today}
+
+\usepackage{color-tufte}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+A simple notes template. Inspired by Tufte-\LaTeX class and beautiful notes by \begin{verbatim*}
+	https://github.com/abrandenberger/course-notes
+\end{verbatim*}
+\end{abstract}
+
+\section{Groups}
+Let's start our study in algebra with the most basic, known but also powerful structure in mathematics. Groups are so useful because they generalize a lot of properties and allow the development of great theorems. Let's start by defining what is an operation.
+
+\begin{definition}[Operation]
+	An operation over $G$ is a function $$\cdot : G \times G \to G$$ such that any pair of elements $(a, b) \mapsto \cdot(a, b)$(This image is noted as $a \cdot b$) 
+\end{definition}
+
+So, take for example the addition, the modular product or the symmetric difference over sets. Now, groups are literally the generalization of operations that "behave well".
+
+\begin{definition}[Group]
+	A group is a ordered pair $(G, \cdot)$ such that $G$ is a set, $\cdot$ is an operation closed on $G$, that is, for any $a, b \in G$, $a \cdot b \in G$, and holds the next properties:
+	\begin{enumerate}
+		\item \textbf{Associativity:} For any $a, b, c \in G$, $a \cdot (b \cdot c) = (a\cdot b) \cdot c$
+		\item \textbf{Identity element:} There is an element denoted as $e \in G$ such that $e \cdot a = a \cdot e = a$
+		\item \textbf{Inverse element:} For any $a \in G$, there is an element denoted as $a^{-1} \in G$ such that $a \cdot a^{-1} = a^{-1} \cdot a = e$
+	\end{enumerate}
+\end{definition}
+Many of the properties given must be familiar with you for the work with real numbers. \footnote{If for any $a, b \in G$, $a \cdot b = b \cdot a$ then $G$ is called abelian.} Let's prove some statements basics in group theory.
+
+\begin{theorem}[Basic properties]
+	Let $G$ be a group under $\cdot$. Then:
+	\begin{enumerate}
+		\item $G$ has exactly one identity element, and every element of $G$ has exactly one inverse element.
+		\item For any $a, b, c \in G$, if $a \cdot b = a \cdot c$ then $b = c$
+		\item For any $a, b \in G$, $(a\cdot b)^{-1} = b^{-1}\cdot a^{-1}$ 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	For each of the properties, the trick is use the Associativity and the inverse elements.
+	\begin{enumerate}
+		\item Suppose $e_1$ and $e_2$ are identity elements of $G$. Then $e_1 \cdot e_2 = e_1$ because $e_2$ is an identity, but also $e_1 \cdot e_2 = e_2$ because $e_1$ is an identity. So, $e_1 = e_2$. Now suppose that for $a$, $b$ and $c$ are inverse elements. Manipulate the next expression with associativity law:
+		\begin{align*}
+			b \cdot a \cdot c &= (b \cdot a) \cdot c\\
+			&= e \cdot c\\
+			&= c
+		\end{align*}
+		But also:
+		\begin{align*}
+			b \cdot a \cdot c &= b \cdot (a \cdot c)\\
+			&= b \cdot e\\
+			&= b
+		\end{align*}
+		So $b = c$.
+
+		\item Just operate with the inverse of $a$ by the left in both sides of the expression:
+		\begin{align*}
+			a \cdot b &= a \cdot c\\
+			a^{-1} \cdot a \cdot b &= a^{-1} \cdot a \cdot c\\
+			e \cdot b &= e \cdot c\\
+			b &= c
+		\end{align*}
+
+		\item Since the inverse element is unique, then if we prove that $(b^{-1}\cdot a^{-1}) \cdot (a \cdot b) = e$ we can assure that $(a\cdot b)^{-1} = b^{-1}a^{-1}$. So:
+		\begin{align*}
+			(b^{-1} \cdot a^{-1}) \cdot (a \cdot b) &= b^{-1} \cdot (a^{-1} \cdot a) \cdot b\\
+			&= b^{-1} \cdot e \cdot b\\
+			&= b^{-1} \cdot b\\
+			&= e
+		\end{align*}
+		In a similar way, you can prove that $(a \cdot b) \cdot (b^{-1}a\cdot a^{-1}) = e$. So, it must be the inverse of $a \cdot b$.
+	\end{enumerate}
+\end{proof}
+
+\section{Fields}
+
+Ok, now we are so far good. Our interest in groups is also because they let us define in an easier way a structure called \textit{field}. Real numbers are such a good example of a field, when two operations are joined and "behave well" again.
+
+\begin{definition}[Field]
+	Let F be a set with two operations $+$ and $\cdot$. Then $F$ is a field if:
+	\begin{enumerate}
+		\item $(F, +)$ is an abelian group. Its identity element is denoted as $0$
+		\item $(F \setminus \{0\}, \cdot)$ forms an abelian group. Its identity element is denoted as $1$
+		\item $+$ and $\cdot$ are related through the distributive law:
+		\begin{align*}
+			a \cdot (b + c) &= a\cdot b + a\cdot c\\
+			(b + c) \cdot a &= b \cdot + c \cdot a\\
+		\end{align*}
+	\end{enumerate}
+\end{definition}
+
+In a field, the element $0$ is called an annihilator since any element multiplied by $0$, is $0$. This is our next proof:\footnote{This is true even with special structures called \textit{ring} that we will see later.}
+\begin{theorem}[Zero cancellation]
+	In a field $F$, for any $a \in F$, $$a \cdot 0 = 0$$
+\end{theorem}
+\begin{proof}
+	Operate the expression like follows:
+	\begin{align*}
+		a\cdot 0 &= a\cdot (0 + 0)\\
+		a\cdot 0 &= a\cdot 0 + a\cdot 0
+	\end{align*}
+	And if you add the additive inverse of $a\cdot 0$ in both sides we have:
+	\begin{align*}
+		a\cdot 0 - (a\cdot 0) &= a\cdot 0 + a\cdot 0 - (a\cdot 0)\\
+		0 &= a\cdot 0
+	\end{align*}
+\end{proof}
+
+Note that fields have at least two elements: 1 and 0. If it's not true, then $\cdot$ would be an empty group in $F$. But groups have at least the identity element, so it can't be empty. 
+
+We will prove one property that should be very familiar with you at this point. If you have two real numbers and their product is zero, then one of them must be zero. This is a general property of fields. 
+
+\begin{theorem}[No divisors of zero]
+	In a field $F$, if $a, b \in F$ are such that $a \cdot b = 0$ then $a = 0$ or $b = 0$.
+\end{theorem}
+\begin{proof}
+	Suppose $a \cdot b = 0$ but $a \neq 0$. Then we want to prove that $b = 0$. So, begin with the original expression:
+	\begin{align*}
+		a \cdot b &= 0\\
+		a^{-1} \cdot a \cdot b &= a^{-1} \cdot 0\\
+		b &= 0
+	\end{align*}
+\end{proof}
+
+The fields could also have a property called \textit{torsion}. For example, if $F$ has only $1$ and $0$ and the operation are modular addition and product, then $1 + 1 = 0$. This is also a characteristic of fields!(Bad prank).
+
+\begin{definition}[Characteristic of a field]
+	In a field $F$, the number $\lambda$ is called a \textit{characteristic} of the field if $\lambda$ is the least natural number such that:
+	\begin{align*}
+		\underset{\lambda\, \, times}{1 + 1 + \dots + 1} &= 0
+	\end{align*}
+	if such number doesn't exists, then the field has characteristic zero.
+\end{definition}
+
+And since we are talking about equations, we should think about equations in fields. So, similarly to what we see in calculus, we define a polynomial with coefficients in $F$ as a function $p(x) = a_{n}x^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0$ where $a_i \in F$ with $0 \le i \le n$.\\
+
+If you are familiar with math, you should be familiar that most problems in high school is solve a equation of the form $p(x) = 0$. If for any combinations of coefficients in polynomials of a field $F$, you can find at least one $a \in F$ such that $p(a) = 0$, then $F$ is said to be algebraically closed.\\
+
+For example, $\mathbb{R}$ is not algebraically closed, because $p(x) = x^2+1$ has no real solutions. There is a fact, called \textit{the fundamental theorem of algebra} that assures that $\mathbb{C}$ is algebraically closed.\\
+
+Before we continue in a development of algebra, let's announce a definition important in fields.
+
+\begin{definition}[Subfield]
+	Let $F$ be a field. If $K$ is a subset of $F$ such that $K$ forms a field under the same operations of $F$, then $K$ is called a subfield of $K$ and $F$ is called an extension field of $K$.
+\end{definition}
+
+
+\section{Construction of $\mathbb{C}$ from $\mathbb{R}$}
+The next construction is introduced in order to explain and development the exercises with fields. So, consider in general $\mathbb{R}^n$ as the $n-$tuples of real numbers. If you take $n =2$ we define the sum of tuples as:
+\begin{align*}
+	(x_1, y_1) + (x_2, y_2) = (x_1 + x_2, y_1 + y_2)
+\end{align*}
+for all $x = (x_1, y_1)$ and $y = (x_2, y_2)$ tuples on $\mathbb{R}^2$. It is easy to verify that since $\mathbb{R}$ is a field, then $\mathbb{R}^2$ forms a group under $+$. And what if we want to create a field? How we should define the product? Well, the first approach that one can think is:
+\begin{align*}
+	(x_1, y_1)(x_2, y_2) &= (x_1x_2, y_1y_2)
+\end{align*}
+But this approach has a lot of drawbacks. Even when it commutes and associate, the existence of neutral element, no zero divisors and inverse elements is a big problem here! As long as we advanced in the development of algebra, it will become evident that is is convenient to define it as:
+\begin{align*}
+	(x_1, y_1)(x_2, y_2) &= (ac-bd, ad+bc)
+\end{align*}
+
+\section{Exercises}
+The next exercises are taken from the book \textit{Abstract Linear Algebra} by \textit{Morton L. Curtis}.
+
+\begin{problem}
+A subset $H$ of a group $G$ is a \textit{subgroup} of $G$ if the operation on $G$ makes $H$ into a group. Prove that $H \subseteq G$ is a subgroup if and only if:
+\begin{enumerate}
+	\item $e \in H$
+	\item if $a, b \in H$, then $ab^{-1} \in H$
+\end{enumerate}
+\end{problem}
+\begin{proof}
+	Suppose $H \subseteq G$ and let's prove a double implication:
+	\begin{itemize}
+		\item[$\Rightarrow)$] Suppose that $H$ is a subgroup. Then by definition $H$ must have an identity element, but since $G$ has only one identity element, then it must be the same in $H$. We conclude that $e \in H$. Now, since $H$ is a group, then $b$ must be an inverse element in $H$ and since the operation must be closed then $ab^{-1} \in H$.
+		\item[$\Leftarrow)$] Suppose $H$ is a subset of $G$ such that $e \in H$ and for any $a, b \in H$, then $ab^{-1} \in H$. We want to prove that $H$ is a group. Note that since $e \in H$, we have already the identity element. The associativity property is given because $G$ is a group. Now, if $a \in H$, we already have that $a^{-1} \in H$, because the second property given and the fact that $ea^{-1} = a^{-1}$. To prove that $H$ is closed under the same operation, take that $a \in H$ and $b \in H$. We know that $b^{-1} \in H$ and by the second property we can assure that $a(b^{-1})^{-1} \in H$, but it means that $ab \in H$. 
+	\end{itemize}
+\end{proof}
+
+\begin{problem}
+	For $n \in \mathbb{Z}^+$ define:
+	\begin{align*}
+		\mathbb{Z}_n &:= \{0, 1, \dots, n-1\}\\
+		a \oplus b &:= (a+b) \mod n\\
+		a \otimes b &:= (a \cdot b) \mod n
+	\end{align*}
+	Prove that $\mathbb{Z}_n$ has no divisors of zero if and only if $n$ is prime 
+\end{problem}
+\begin{proof}
+	\begin{itemize}
+		\item[$\Rightarrow)$] Suppose $n$ no is prime. Then there are two numbers $x, y$ different from $1$ and $0$ such that $x \cdot y = n$. Then:
+		\begin{align*}
+			x \otimes y &= (x \cdot y) \mod n\\
+			&= n \mod n\\
+			&= 0
+		\end{align*}
+		So $x \otimes y = 0$ but $x \neq 0$ and $y \neq 0$. So, $\mathbb{Z}_n$ has divisors of $0$.
+		\item[$\Leftarrow)$] Suppose $n$ is a prime number. Now, suppose that exists $a, b \in \mathbb{Z}_n$ such that $a \otimes b = 0$ but $a \neq 0$ and $b \neq 0$. So, $(a \cdot b) \mod n = 0$. Now, we can make:
+		\begin{align*}
+			n \otimes (a \otimes b) &= (n \cdot a \cdot b) \mod n\\
+			&= n \mod n \cdot (a \cdot b) \mod n\\
+			&= n \mod n \cdot 0\\
+			&= 0
+		\end{align*}
+		So we conclude that $n | n(ab)$ but it contradicts the hypotesis that $n$ is a prime number since $ab$ cannot be $1$. 
+	\end{itemize}
+\end{proof}
+\end{document}
