@@ -163,7 +163,7 @@ for all $x = (x_1, y_1)$ and $y = (x_2, y_2)$ tuples on $\mathbb{R}^2$. It is ea
 \end{align*}
 But this approach has a lot of drawbacks. Even when it commutes and associate, the existence of neutral element, no zero divisors and inverse elements is a big problem here! As long as we advanced in the development of algebra, it will become evident that is is convenient to define it as:
 \begin{align*}
-	(x_1, y_1)(x_2, y_2) &= (ac-bd, ad+bc)
+	(x_1, y_1)(x_2, y_2) &= (x_1x_2-y_1y_2, x_1y_2+y_1x_2)
 \end{align*}
 
 \section{Exercises}
@@ -212,4 +212,120 @@ A subset $H$ of a group $G$ is a \textit{subgroup} of $G$ if the operation on $G
 		So we conclude that $n | n(ab)$ but it contradicts the hypotesis that $n$ is a prime number since $ab$ cannot be $1$. 
 	\end{itemize}
 \end{proof}
+
+\begin{problem}
+	Show that $(1, 0)$ acts as identity for $\mathbb{C}$ with the defined multiplication
+\end{problem}
+\begin{proof}
+	Let $(a, b) \in \mathbb{R}^2$, then its product with $(1, 0)$ is defined as:
+	\begin{align*}
+		(a, b)(1, 0) &= (a\cdot 1 - b \cdot 0, a\cdot 0 + b \cdot 1)\\
+		&= (a\cdot 1, b\cdot 1)\\
+		&= (a, b)
+	\end{align*}
+\end{proof}
+
+\begin{problem}
+	Show that the product defined for $\mathbb{C}$ extends the multiplication for $\mathbb{R}$ if $\mathbb{R}$ is defined as $\{(r, 0) \in \mathbb{R}^2 : r \in \mathbb{R}\}$
+\end{problem}
+\begin{proof}
+	Take $a, b \in R$. Then their product is:
+	\begin{align*}
+		(a, 0)(b, 0) &= (a\cdot b - 0\cdot 0, a\cdot 0 - b\cdot 0)\\
+		&= (a\cdot b - 0, 0-0)\\
+		&= (a\cdot b, 0)
+	\end{align*}
+	Which is the representation for $a\cdot b$ in $\mathbb{C}$
+\end{proof}
+\begin{problem}
+	Show that the operations defined before makes $\mathbb{C}$ a field.
+\end{problem}
+\begin{proof}
+	
+\end{proof}
+
+\begin{problem}
+	Write $(a, b)$ as $a + bi$ and treat these as polynomials in $i$ with the condition that $i^2 = -1$. Show this generates our definition of product.
+\end{problem}
+\begin{proof}
+	Take two complex numbers, named $x_1 + y_1i$ and $x_2 + y_2i$, if you multiply them:
+	\begin{align*}
+		(x_1+y_1i)(x_2+y_2i) &= (x_1+y_1i)x_2 + (x_1+y_1i)y_2i\\
+		&= x_1x_2 + y_1x_2i + x_1y_2i + y_1y_2i^2\\
+		&= x_1x_2 - y_1y_2 + x_1y_2i + y_1x_2i\\
+		&= (x_1x_2 - y_1y_2) + (x_1y_2 + y_1x_2)i
+	\end{align*}
+	And that is represented as $(x_1x_2 - y_1y_2, x_1y_2 + y_1x_2)$
+\end{proof}
+
+\begin{problem}
+	Define the conjugate of $\alpha = a+bi \in \mathbb{C}$ to be $\overline{\alpha} = a-bi$. Prove that for $\alpha, \beta \in \mathbb{C}$ we have:
+	\begin{enumerate}
+		\item $\overline{(\alpha+\beta)} = \overline{\alpha} + \overline{\beta}$
+		\item $\overline{\alpha\beta} = \overline{\alpha} \overline{\beta}$
+	\end{enumerate}
+	Also show that $\alpha\overline{\alpha}$ is a nonnegative real number, and $\alpha\overline{\alpha} = 0$ exactly when $\alpha = 0$.
+\end{problem}
+\begin{proof}
+	Take $\alpha = a+bi$ and $\beta = c+di$ then:
+	\begin{align*}
+		\overline{(\alpha + \beta)} &= \overline{(a+bi+c+di)}\\
+		&= \overline{(a+c + bi+di)}\\
+		&= \overline{((a+c) + (b+d)i)}\\
+		&= (a+c)-(b+d)i\\
+		&= a+c+(-b-d)i\\
+		&= a+c-bi-di\\
+		&= a-bi + c-di\\
+		&= (a-bi) + (c-di)\\
+		&= \overline{\alpha} + \overline{\beta}
+	\end{align*}
+	Also, if you multiply them we would have by our representation of tuples of $\mathbb{R}^2$:
+	\begin{align*}
+		\overline{(a, b)(c, d)} &= \overline{(ac-bd, ad+bc)}\\
+		&= (ac-bd, -ad-bc)\\
+		&= (a, -b)(c, -d)
+	\end{align*}
+	And the last property is a consequence that $\mathbb{C}$ is a field, since a field has no divirsos of $0$, then if $\alpha\overline{\alpha} = 0$ implies that $\alpha = 0$ or $\overline{\alpha} = 0$, but if $\alpha = 0$ then $\alpha = \overline{\alpha}$ and in the other way.
+\end{proof}
+\begin{problem}
+	Let $p(x)$ be a polynomial in the indeterminate $x$ with real coefficients. Show that for any $\alpha \in \mathbb{C}$ we have $$\overline{p(\alpha)} = p(\overline{\alpha})$$ and use this to prove that if $\alpha$ is a complex root of $p$, the $\overline{\alpha}$ is also a root.
+\end{problem}
+\begin{proof}
+	Take $p(x) = a_{n} \cdot x^n + a_{n-1} \cdot x^{n-1} + \dots + a_1 x + a_0$. Remember that $a_i \in \mathbb{R}$, and remember that if $r \in \mathbb{R}$ then $\overline{r} = r$. So, for $p$, we have:
+	\begin{align*}
+		\overline{p(\alpha)} &= \overline{(a_{n} \cdot \alpha^n + a_{n-1} \cdot \alpha^{n-1} + \dots + a_1 \alpha + a_0)}\\
+		&= \overline{a_n \cdot \alpha^n} + \overline{a_{n-1} \alpha^{n-1}} + \dots + \overline{a_1 \alpha} + \overline{a_0}
+	\end{align*}
+	Note that $\overline{a_0} = a_0$. Now:
+	\begin{align*}
+		\overline{a_i \alpha^i} &= \overline{a_i} \cdot \overline{\alpha^i}\\
+		&= a_i \cdot \overline{\alpha^i}
+	\end{align*} 
+	And if you apply inductively the second property of the previous problem, then $\overline{\alpha^i} = \overline{\alpha}^i$. Therefore:
+	\begin{align*}
+		\overline{a_n \cdot \alpha^n} + \overline{a_{n-1} \alpha^{n-1}} + \dots + \overline{a_1 \alpha} + \overline{a_0} &= a_n \cdot \overline{a}^n + a_{n-1} \cdot \overline{\alpha}^{n-1} + \dots + a_1 \overline{\alpha} + a_0\\
+	\end{align*}
+	But it implies that $\overline{p(\alpha)} = p(\overline{\alpha})$. Now, suppose that $\alpha$ is a complex root of $p$, then:
+	\begin{align*}
+		p(\alpha) = 0
+	\end{align*}
+	If you apply the conjugate of both expression:
+	\begin{align*}
+		\overline{p(\alpha)} = 0
+	\end{align*}
+	And by the proposition we just have proved:
+	\begin{align*}
+		p(\overline{\alpha}) = 0
+	\end{align*}
+	So $\overline{\alpha}$ is a complex root of $p$.
+\end{proof}
+
+\begin{problem}
+	A polynomial $p(x)$ over a field $k$ is monic if the highest power of $x$ has coefficient 1. Let $p(x)$ be monic and let $r \in k$. Show that if $p(x)$ is divided by $x-r$, then the remainder is $p(r)$. Show that this remains true if $p(x)$ has coefficients in $\mathbb{R}$ and $r \in \mathbb{C}$.
+\end{problem}
+
+
+\begin{problem}
+	From the previous problem, we see that if $p(x)$ is monic with real coefficients and $\alpha \in \mathbb{C}$ is a root of $p(x)$, then $x-a$ divides $p(x)$. Now prove that a monic polynomial $p(x)$ with real coefficients can be factored into linear and quadratic factors.
+\end{problem}
 \end{document}
