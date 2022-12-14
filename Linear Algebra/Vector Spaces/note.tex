@@ -1,0 +1,236 @@
+\documentclass{tufte-handout}
+
+\title{Course: Linear Algebra(Vector Spaces)}
+\author{Sebastián Caballero}
+\date{9th December 2022}
+
+\usepackage{color-tufte}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+A simple notes template. Inspired by Tufte-\LaTeX class and beautiful notes by \begin{verbatim*}
+	https://github.com/abrandenberger/course-notes
+\end{verbatim*}
+\end{abstract}
+\section{Vector Spaces}
+So far we have seen some useful algebraic structures. Let's focus a bit on $\mathbb{C}$, which we constructed as ordered pairs of $\mathbb{R}^2$. What we defined as sum is quite simple but powerful, but also we can expand to the multiply of an ordered pair, taking $c$ a real number, we define $c(a, b) = (ca, cb)$. This is what we think on vectors on the real plane and even we can extend this vision to $\mathbb{R}^3, \mathbb{R}^4, \dots$. The concept we have just created is called a vector space, and we can generalize not just in terms of numbers, but in a more general way.
+
+\subsection{What is a vector space?}
+\begin{definition}[Vector Space]
+	Let $V$ be a nonempty set, we call it a vector space over a field $K$ if there is an operation $+$ in $V$ and a product operation defined from $K \times V$ such that:
+	\begin{itemize}
+		\item $(V, +)$ forms an abelian group
+		\item If $v \in V$ then $kv \in V$ for any $k \in K$
+		\item $k(lv) = (kl)v$ for any $v \in V$ and $k, l \in K$
+		\item $k(u + v) = ku + kv$ for any $u, v \in V$ and $k \in K$
+		\item $(k + l)v = kv + lv$ for any $v \in V$ and $k \in K$
+	\end{itemize}
+	The elements in $V$ are called vectors and the elements of $K$ are called scalars.
+\end{definition}
+
+So, it is easy to see that thanks to the property of real numbers, $\mathbb{R}^n$ is a vector space over $\mathbb{R}$ or $\mathbb{C}$. Also, we can see that there are many functions that forms a vector space over $\mathbb{R}$ such as the differentiable functions or the functions that are continuos over $[0, 1]$. An interesting observation is that any field $k$ forms a vector space over itself, in where the vectors and the scalars are the same. \\
+
+\subsection{Subspaces and $Span$}
+
+In a similar way we did to the groups and fields, we can define substructures over vector spaces, that has the original name of subspaces(Just kidding, that is not original).
+\begin{definition}[Subspace]
+	Let $V$ be a vector space over $K$. If $W\subseteq V$ also forms a vector spaces over $K$ with the same operations, we call it a Subspace.
+\end{definition}
+
+Ok, and just like we did with the groups, that we characterized certain properties a subgroup needs to be so, we can do it with a subspace. Let us introduce first an important concept.
+
+\begin{definition}[Linear combination]
+	Let $V$ be a vector space over $K$. Let $v_1, v_2, \dots, v_n \in V$ be vectors and $k_1, k_2, \dots, k_n \in K$ be scalars, a linear combination is just:
+	\begin{align*}
+		k_1v_1 +k_2v_2 \dots + k_nv_n
+	\end{align*}
+\end{definition}
+
+So, what we want is to generate with the linear combinations is the subspace itself! And with a subspace, we want to maintain linear combinations on the space. So, this is literally our theorem.
+
+\begin{theorem}
+	A subset $W$ of a vector space $V$ over $K$ is a subspace of $V$ if and only if any linear combination of elements of $W$ is in $W$.
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item[$\Rightarrow)$] Suppose that $W$ is a subspace of $V$. It implies that for any $k \in K$ and $v \in W$, $kv \in W$. Also, because $+$ forms an abelian group over $W$, it is closed over $W$ so for any numbers of vectors and scalars $v_1, v_2, \dots, v_n$, $k_1, k_2, \dots, k_n$ the linear combination $k_1v_1 + k_2v_2 + \dots + k_nv_n$ is in $W$.
+		\item[$\Leftarrow)$] Suppose that any linear combination of elements of $W$ is in $W$. Then $+$ forms an abelian group taking the linear combination $1 \cdot v_1 + 1 \cdot v_2$ it is closed on $W$ and the other properties are inherited from $V$. Also, take the linear combination $kv_1$ seeing that property 2 indeed holds. The other three properties needed for a vector space are inherited from $V$ and therefore are valid over $W$, so $W$ also forms a vector space over $K$.   
+	\end{itemize}
+\end{proof}
+
+Some examples of subspaces are differentiable functions that are solutions to certain differential equations, subsets of $\mathbb{R}^{n}$, the basic subfield with the identities $\{0, 1\}$ or polynomials. Since, all vector spaces are nothing more than sets, what happens when we intersect them?
+
+\begin{theorem}
+	If $V$ is a vector space over $K$ and $\{W_\alpha\}_{\alpha \in A}$ is a collection of subspaces of $V$, then
+	\begin{align*}
+		W &= \bigcap_{\alpha \in A} W_\alpha
+	\end{align*}
+	is also a vector space.
+\end{theorem}
+\begin{proof}
+	Take $k_1, k_2, \dots, k_n$ be scalars over $K$ and let $v_1, v_2, \dots, v_n$ be elements of $W$. Since, for example $v_1 \in W$, then $v_1 \in W_\alpha$ for all $\alpha \in A$, and since they are subspaces, then $k_1v_1 \in W_\alpha$ for all $\alpha \in A$, hence $k_1v_1 \in W$. Now, again, since $v_1, v_2 \in W$ then $v_1, v_2 \in W_\alpha$ for all $\alpha in A$, because they all form abelian groups, $v_1 + v_2 \in W_\alpha$ for all $\alpha \in A$ and therefore $v_1+v_2 \in W$.\\
+
+	We just apply this recursively to determine that the linear combination $$k_1v_1 + k_2v_2 + \dots + k_nv_n$$ is in $W$. And by the last theorem, $W$ is a subspace.
+\end{proof}
+
+Great! So far we have seen some useful properties about subspaces. But the magic comes with the concept of $Span$. 
+
+\begin{definition}[Span and generation]
+	Let $V$ be a vector space over $K$. If $A \subseteq V$, we call $Span(A)$ to the intersection of all subspaces of $V$ that contain $A$. We say that $A$ spans or generates $V$ if and only $Span(A) = V$.
+\end{definition}
+
+If we would want to describe in formal terms $Span(A)$, then suppose that $X$ is the set defined as:
+\begin{align*}
+	X &:= \{W \subseteq V:A \subseteq W \wedge \text{W forms a vector space over $K$}\}
+\end{align*}
+And then $\bigcap X$ is $Span(A)$ and by the second theorem we proved, it is also a vector space.For example, over $\mathbb{R}^2$ we see that $$A = \{(x, 0): x \in \mathbb{R}\}$$ can't generate $\mathbb{R}^2$ since for any element $(a, b) \in \mathbb{R}^2$ if $b \neq 0$, no matter what we do, the linear combination of vectors over $A$ is just $(k_1x_1 + k_2x_2 + \dots k_nx_n, 0)$. In other example, the set $$A = \{(0, 1), (1, 0)\}$$ indeed can generate $\mathbb{R}^2$. The argument is that any linear combination of elements of $A$ is also in $\mathbb{R}^2$ and for any element in $\mathbb{R}^2$ we can find a linear combination to create it.
+
+
+\subsection{Exercises}
+The next exercises are taken from Abstract Linear Algebra by Morton L. Curtis.
+
+\begin{problem}
+	Show that $V = \{f: \mathbb{R} \to \mathbb{R} | f \text{ is continuous}\}$ is a vector space over $\mathbb{R}$ if you define:
+	\begin{align*}
+		(f + g)(t) &= f(t) + g(t)\\
+		(kf)(t) &= k(f(t))
+	\end{align*}
+	Then prove that:
+	\begin{enumerate}
+		\item Let $t_0 \in R$ and let $W = \{f \in V: f(t_0) = 0\}$, $W$ is a subspace of $V$
+		\item Let $U = \{f \in V: \forall t \in \mathbb{R}, \, f(t^2) = (f(t))^2\}$, show that $U$ is not a subspace of $V$
+		\item Let $X = \{f \in V: f \text{ is differentiable}\}$ then $X$ is a subspace of $V$
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	First, note that if $f$ and $g$ are continuous, so is $f + g$ by limit properties. So, we have a closed operation over $V$, and thanks to the properties of real numbers, we can assure associativity, commutativity and we define the neutral element as $e: \mathbb{R} \to \mathbb{R}$ such that $f(x) = 0$ for all $x \in \mathbb{R}$, so the inverse element is just $h: \mathbb{R} \to \mathbb{R}$ such that $h(x) = -f(x)$. Also, by limit properties, we have that $kf(t)$ is also a continuous function and they obey the other laws since the images are just real numbers, so the same properties are valid. So, $V$ is a vector space.
+	\begin{enumerate}
+		\item If $k \in \mathbb{R}$ then $(kf)(t) = kf(t)$ and in special, $kf(t_0) = k\cdot 0 = 0$, so $kf(t) \in W$ if $f \in W$. If $f$ and $g$ are in $W$ then $f+g$ is also a function, and in special, $(f+g)(t_0) = f(t_0) + g(t_0) = 0+0 =0$. So, any linear combination of elements in $W$ is also in $W$, and hence $W$ is a subspace of $V$.
+		\item Suppose that $f$ and $g$ are functions in $U$. Then $f(t^2) = (f(t))^2$ and $g(t^2) = (g(t))^2$ for all $t^2$. So, $(f+g)(t^2) = f(t^2) + g(t^2) = (f(t))^2 + (g(t))^2$. But $(f(t) + g(t))^2 =  (f(t))^2 + 2 (f(t))(g(t)) + (g(t))^2$ so $f+g \not \in U$ and it cannot form an abelian group so $U$ is not a subspace of $V$.
+		\item If $f$ and $g$ are differentiable, then $f+g$ is also differentiable and it is just $\frac{d}{dx} f(x) + \frac{d}{dx} g(x)$. If $f$ is differentiable, then $kf(x)$ is differentiable and its derivate is $\frac{d}{dx} kf(x) = k\frac{d}{dx} f(x)$. So, any linear combination of elements in $X$ is also an element of $X$ and therefore $X$ is a subspace of $V$.
+	\end{enumerate} 
+\end{proof}
+
+\begin{problem}
+	If $U, W$ are subspaces of the vector space $V$, show that the sum of $U$ and $W$
+	\begin{align*}
+		U + W &:= \{u+w: u \in U \wedge w \in W \}
+	\end{align*}
+	is also a subspace of $V$
+\end{problem}
+\begin{proof}
+	Suppose that $u+w$ is in $U+W$ and $k \in K$, then $k(u + w) = ku + kw$ and since $U, W$ are subspaces $ku \in U$ and $kw \in W$, $ku+kw \in U+W$. Also, if $u+w, a+b \in U+W$ then the sum $(u+w) +(a+b) = (u+a) + (w+b)$ and since they are subspaces, $u+a \in U$ and $w+b \in W$, so $(u+w) + (a+b) \in U + W$. So any linear combination of elements in $U+W$ is also in $U+W$ so $U+W$ is also a subspace.
+\end{proof}
+\begin{problem}
+	If $U$ and $W$ are subspaces of $V$, show that $U \cup W$ need not be a subspace. However, if $U \cup W$ is a subspace, show that either $U \subseteq W$ or $W \subseteq U$.
+\end{problem}
+\begin{proof}
+	Since $U$ and $W$ are subspaces, it would be easy to say that $ku \in U$ and $lw \in W$, but the operation $+$ is just closed on $U$ and $W$ alone, so $ku + lw$ might not be in some of them, even when it is indeed on $V$. So, if it happens, $U \cup W$ is not a subspace.\\
+
+	Suppose that $U \not\subseteq W$ and $W \not\subseteq U$, then there are elements $u, w$ such that $u \not \in W$ and $w \not\in U$. Now, suppose that $U \cup W$ is a vector space, then since $u, w \in U \cup W$, $u + w \in U \cup W$. But it implies that $u + w \in U$ or $u + w \in W$, in both cases we would conclude that $u \in W$ or $w \in U$ which is a contradiction, so $U \cup W$ cannot be a vector space.
+\end{proof}
+
+\begin{problem}
+	Suppose $A$ and $B$ are subsets of the vector space $V$; Show that if $A \subseteq B$ then $Span(A) \subseteq Span(B)$
+\end{problem}
+\begin{proof}
+	Suppose that $w \in Span(A)$, so for any vector space $W$, if that space contains $A$, $w \in W$. For all vector space $U$ such that $B \subseteq W$, $A \subseteq W$ and so $w \in U$. Since it applies for all vector spaces that contains $B$, then $w \in Span(B)$ and therefore $Span(A) \subseteq Span(B)$.
+\end{proof}
+
+\begin{problem}
+	Consider $2 \times 2$ squares arrays of real numbers. We denote the set of them as:
+	\begin{align*}
+		M_2(\mathbb{R}) &:= \left\{\begin{pmatrix}a & b\\ c & d \end{pmatrix}: a, b, c, d \in \mathbb{R}\right\}
+	\end{align*}
+	We make $M_2(\mathbb{R})$ a vector space defining:
+	\begin{align*}
+		\begin{pmatrix}
+			a & b\\ c& d
+		\end{pmatrix} + \begin{pmatrix}
+			e & f\\ g& f
+		\end{pmatrix} &= \begin{pmatrix}
+			a+e & b+f\\ c+g & d+f
+		\end{pmatrix} & r \begin{pmatrix}
+			a & b\\ c&d
+		\end{pmatrix} &= \begin{pmatrix}
+			ra & rb\\ rc& rd
+		\end{pmatrix}
+	\end{align*}
+	\begin{enumerate}
+		\item A matriz $\begin{pmatrix}
+			a & b\\ c& d
+		\end{pmatrix}$ is diagonal if $b = c = 0$. Show that the set of all diagonal matrices $D$ is a subspace of $M_2(\mathbb{R})$. Do the same for the set $T$ of upper triangular matrices($c = 0$).
+		\item A matriz $\begin{pmatrix}
+			a & b\\ c& d
+		\end{pmatrix}$ is singular if $ad - bc = 0$ and otherwise is not singular. Prove that the set of all singular matrices in $M_2(\mathbb{R})$ does not form a subspace, and do the same for the set of all not singular matrices.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	First, if you want to show that the set $M_2(\mathbb{R})$ indeed forms a vector space, it is easy to see that it forms an abelian group under $+$ just because $\mathbb{R}$ do it. By definition, for a matrix $A$ and a scalar $r$, $rA$ is a matrix, and the prove for the other properties is obvious.\\
+
+	\begin{enumerate}
+		\item First, if $A$ is a diagonal matrix, then $A = \begin{pmatrix}
+			a & 0\\0 & b
+		\end{pmatrix}$ so if you multiply it by an scalar $r$ it will be:
+		\begin{align*}
+			rA &= \begin{pmatrix}
+				ra & r0\\ r0 & rb
+			\end{pmatrix}\\
+			&=\begin{pmatrix}
+				ra & 0\\ 0 & rb
+			\end{pmatrix}
+		\end{align*} 
+		so $rA$ is also a diagonal matrix. If $A$ and $B$ are diagonal matrices, such that $A = \begin{pmatrix}
+			a & 0\\ 0 & b
+		\end{pmatrix}$ and $B = \begin{pmatrix}
+			c & 0\\ 0 & d
+		\end{pmatrix}$
+		then its sum is:
+		\begin{align*}
+			\begin{pmatrix}
+				a & 0\\ 0 & b
+			\end{pmatrix} + \begin{pmatrix}
+				c & 0\\ 0 & d
+			\end{pmatrix} &= \begin{pmatrix}
+				a + c & 0 + 0\\ 0 + 0 & b + d
+			\end{pmatrix}\\
+			&= \begin{pmatrix}
+				a + c & 0 \\ 0 & b + d
+			\end{pmatrix}
+		\end{align*}
+		so $A+B$ is also a diagonal matrix. Now, any linear combination of diagonal matrices is also a diagonal matrix, so $D$ is a subspace of $M_2(\mathbb{R})$. The proof for $T$ is exactly the same, so $T$ is also a subspace of $M_2(\mathbb{R})$.
+
+		\item First, suppose that $A = \begin{pmatrix}
+			a & b\\ c& d
+		\end{pmatrix}$ and $ad - bc = 0$, with $a \neq 0$ and $a \neq b$. Now, the matrix $A' = \begin{pmatrix}
+			0 & 0\\ a & a
+		\end{pmatrix}$ is also a singular matrix. So, if you add the two matrices:
+		\begin{align*}
+			\begin{pmatrix}
+				a & b\\ c& d
+			\end{pmatrix} + \begin{pmatrix}
+				0 & 0\\ a & a
+			\end{pmatrix} &= \begin{pmatrix}
+				a + 0 & b + 0\\ c + a & d + a
+			\end{pmatrix}\\
+			&= \begin{pmatrix}
+				a & b \\ c +a & d + a
+			\end{pmatrix}
+		\end{align*}
+		And if you verify for the singularity of $A + A'$ you would have:
+		\begin{align*}
+			a(d +a) - b(c+a) &= ad + a^2 - bc - ba\\
+			&= ad - bc + a^2 - ba\\
+			&= a^2 - ba\\
+			&= a(a - b)
+		\end{align*}
+		And since neither $a = 0$ or $a-b = 0$, then the matrix is not singular, and the sum of matrices is not closed on this set. Therefore it cannot be a subspace. For the no singular matrices, since the matrix $\begin{pmatrix}
+			0 & 0\\ 0 & 0
+		\end{pmatrix}$ is singular, it cannot be in the set, but it is the identity element for the sum of matrices, so it cannot be a vector space since it cannot form an abelian group.
+	\end{enumerate}
+\end{proof}
+
+\end{document}
