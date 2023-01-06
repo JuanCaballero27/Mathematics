@@ -1,0 +1,156 @@
+\documentclass{tufte-handout}
+
+\title{Course: Set Theory(Integers \& Rationals)}
+\author{Sebastián Caballero}
+\date{\today}
+
+\usepackage{color-tufte}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+A simple notes template. Inspired by Tufte-\LaTeX class and beautiful notes by \begin{verbatim*}
+	https://github.com/abrandenberger/course-notes
+\end{verbatim*}
+\end{abstract}
+\section{The need for new constructions}
+Since we have constructed the natural numbers, we have put a lot of mathematics in hands of the set theory. But they are not sufficient in most cases, so we need new types of numbers. The first ones are the integers, in which we include the negative numbers and later we construct the rational, which are all the possible fractions between integers.
+
+\section{What are integer numbers?}
+\subsection{Origin of integers}
+In the first approaches a kid have in mathematics, he will learn that $2-3$ is not possible since you can subtract more than what you have. Later, we are taught that there is a solution called $-1$, but this solution is also applicable to $3-4$ and so on. So, we have:
+\begin{align*}
+	3 - 2 &= 4 - 5
+\end{align*}
+And we can do this with a lot of natural numbers. But we don't have $-$ operation on natural number, so we are going to do it convenience. For two integers $a-b$ and $c-d$:
+\begin{align*}
+	a - b &= c - d\\
+	a + d &= c + b
+\end{align*}
+
+And this will be our strategy.
+
+\begin{definition}
+	We define the relation $\sim$ over the set $\mathbb{N} \times \mathbb{N}$ such that $(a, b) \sim (c, d)$ if and only if $a + d = b + c$.
+\end{definition}
+
+This relation will associate all numbers whose difference is the same. For example, $(2, 3) \sim (4, 5)$ since $2 + 5 = 4 + 3$ which implies that $2 - 3 = 4 - 5$. 
+
+\begin{theorem}
+	The relation $\sim$ is an equivalence relation
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item First, note that $a + b = a + b$ which by definition implies that $(a, b) \sim (a, b)$
+		\item Suppose that $(a, b) \sim (c, d)$ so $a + d = c + b$ and then:
+		\begin{align*}
+			a + d &= c + b\\
+			c + b &= a + d\\ 
+		\end{align*}
+		Therefore $(c, d) \sim (a, b)$
+		\item Suppose that $(a, b) \sim (c, d)$ and $(c, d) \sim (x, y)$. This implies:
+		\begin{align*}
+			a + d &= c + b & c + y &= x + d\\
+		\end{align*}
+		If we add the two equalities we would have:
+		\begin{align*}
+			a + d +c + y &= c + b + x + d\\
+			a + y + (c + d) &= x + b + (c + d)\\
+			a + y &= x + b
+		\end{align*}
+		So we can conclude that $(a, b) \sim (x, y)$
+	\end{itemize}
+\end{proof}
+
+We are done with our generalization! We are going to define just what is an integer.
+
+\begin{definition}[Integers numbers]
+	The set $(\mathbb{N} \times \mathbb{N}) / \sim$ will be called as the set of integer numbers and will be denoted as $\mathbb{Z}$. Any element in $\mathbb{Z}$ will be called an integer number.
+\end{definition}
+
+Our next tasks is to define the operations over integers. Take for example the integers $a-b$ and $c-d$ we can sum them as:
+\begin{align*}
+	a - b + c - d &= (a + c) - (b + d)
+\end{align*}
+So if $(a, b), (c, d) \in \mathbb{N} \times \mathbb{N}$ we define $(a, b) \circledcirc (c, d) = (a + c, b + d)$. Also, if we want to multiply numbers like those, we would do:
+\begin{align*}
+	(a-b)(c-d) &= ac - bc -ad + bd\\
+	&= ac + bd - bc - ad\\
+	&= (ac+bd) -(bc + ad)
+\end{align*}
+So we define $(a, b) \odot (c, d) = (ac+bd, bc+ad)$. We need then a theorem to show that this election is independent of what we choose in the equivalence classes.
+
+\begin{theorem}
+	Suppose that $(a, b) \sim (x, y)$ and $(c, d) \sim (z, w)$, then:
+	\begin{itemize}
+		\item $(a, b) \circledcirc (c, d) \sim (x, y) \circledcirc (z, w)$
+		\item $(a, b) \odot (c, d) \sim (x, y) \odot (z, w)$
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Assume that $(a, b) \sim (x, y)$ and $(c, d) \sim (z, w)$, we would have:
+	\begin{align*}
+		a + y &= b + x & c + w &= z + d
+	\end{align*}
+	And we have that:
+	\begin{align*}
+		(a, b) \circledcirc (c, d) &= (a + c, b + d)\\
+		(x, y) \circledcirc (z, w) &= (x + z, y + w)
+	\end{align*}
+	And adding the equalities we have:
+	\begin{align*}
+		a + y + c + w &= b + x + z + d\\
+		(a + c) + (y + w) &= (b + d) + (x + z)
+	\end{align*}
+	So we conclude that $(a + c, b + d) \sim (x + z, y + w)$. And for the $\odot$:
+	\begin{align*}
+		(a, b) \odot (c, d) &= (ac+bd, bc+ad)\\
+		(x, y) \odot (c, d) &= (cx+dy, cy + dx)
+	\end{align*}
+	If we take the first equality from above we can manipulate as:
+	\begin{align*}
+		a + y &= b + x & a + y &= b + x\\
+		ac + cy &= bc + cx & ad + dy &= bd + dx\\
+		ac + cy &= bc + cx & bd + dx &= ad + dy
+	\end{align*}
+	And if we sum them up we would have:
+	\begin{align*}
+		ac + cy + bd + dx &= bc + cx + ad + dy\\
+		(ac+bd) + (cy+dx) &= (cx+dy) + (bc + ad)
+	\end{align*}
+	And we conclude that $(a, b) \odot (c, d) \sim (x, y) \odot (c, d)$. In a similar way we can conclude that $(x, y) \odot (c, d) \sim (x, y) \odot (z, w)$ and therefore $(a, b) \odot (c, d) \sim (x, y) \odot (z, w)$.
+\end{proof}
+
+And with that we can define these operations in $\mathbb{Z}$ as:
+
+\begin{definition}[Operations in $\mathbb{Z}$]
+	Let $[(a, b)], [(c, d)] \in \mathbb{Z}$, we define:
+	\begin{align*}
+		[(a, b)] + [(c, d)] &= [(a, b) \circledcirc (c, d)]\\
+		[(a, b)] \cdot [(c, d)] &= [(a, b) \odot (c, d)]
+	\end{align*}
+\end{definition}
+
+Now, the important part of this definition is the structure for $\mathbb{Z}$.
+
+\begin{theorem}[Structure of $\mathbb{Z}$]
+	The set $\mathbb{Z}$ with $+$ and $\cdot$ forms a ring.
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item The associative and commutative properties follows easily from the properties of $\mathbb{N}$. For a neutral element, we choose the class $[(0, 0)]$ and we would have that $[(a, b)] + [(0, 0)] = [(a, b)]$. For an inverse element of the integer $[(a, b)]$ we choose $[(b, a)]$ so that:
+		\begin{align*}
+			[(a, b)] + [(b, a)] &= [(a + b, a + b)]
+		\end{align*}
+		And since $(a+b, a+b) \sim (0, 0)$, it gives us the neutral element. So, we have an abelian group with $+$ under the set.
+		\item The associative and commutative properties follows again from properties of $\mathbb{N}$, and we have an identity element $[(1, 0)]$ since we would have:
+		\begin{align*}
+			[(a, b)] \cdot [(1, 0)] &= [(a\cdot 1 + b\cdot 0, b\cdot 1 + a \cdot 0)]\\
+			&= [(a + 0, b + 0)]\\
+			&= [(a, b)]
+		\end{align*}
+	\end{itemize}
+\end{proof}
+\end{document}
