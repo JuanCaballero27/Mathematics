@@ -1,0 +1,33 @@
+\documentclass{tufte-handout}
+
+\title{Course: Set Theory \\ \Large Lecture: Size of sets I}
+\author{Sebastián Caballero}
+
+\usepackage{color-tufte}
+
+\begin{document}
+\maketitle
+
+
+
+\part*{Notes}
+\section{The idea of comparing sets}
+We start this study with the basic notions of sizes over sets. We already know for example that $\mathbb{N}$ is an infinite set and that $n$ is a finite set for $n \in \mathbb{N}$. We know for example that if $A = \{1, 2\}$ and $B = \{1, 2, 3\}$ we can say that $B$ is greater than $A$. \\
+
+But if $A = \{0, 1\}$ and $B = \{2, 3, 4\}$ can we say still that $B$ is greater than $A$? Maybe, because $A$ has 2 elements and $B$ has $3$ elements, but could be not easy to generalize over finite sets. So, we can think on pair elements of a set with other.
+
+\section{Formal definitions}
+So, we will first start to define the equality of sizes for sets and then the inequality. Think that we can say that two sets have the same size if we can pair the elements of one set to the other and there are not elements with no pair on both sets. How we can define this?
+
+\begin{definition}[Equinumerous sets]
+	Let $A$ and $B$ be sets. We say that they are Equinumerous written as $A \approx B$ if and only if there is a function $f: A \to B$ such that $f$ is bijective.
+\end{definition}
+
+It is easy to see that this forms an equivalence relation, using the identity element, the properties of bijective functions and composition of functions. And for define the concept of \textit{Less or equal size} we use injective functions.
+
+\begin{definition}[Less or equal size]
+	Let $A$ and $B$ be sets. We say that $A$ has less or equal size to $B$, written $A \preceq B$ if and only if there is exists $f: A \to B$ such that $f$ is injective. We say that $A$ is dominated by $B$ if and only if $A \preceq B$ and $A \not \approx B$, we denote this by $A \prec B$. 
+\end{definition}
+
+We can prove some properties that are easy to deduce. We can get familiarity to this properties thanks to 
+\end{document}
